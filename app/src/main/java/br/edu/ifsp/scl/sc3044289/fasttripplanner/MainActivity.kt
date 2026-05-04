@@ -16,32 +16,31 @@ import br.edu.ifsp.scl.sc3044289.fasttripplanner.ui.theme.FastTripPlannerTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             FastTripPlannerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                val navController = rememberNavController()
+                
+                NavHost(
+                    navController = navController,
+                    startDestination = Routes.TRAVEL_DATA
+                ) {
+                    // tela 1
+                    composable(Routes.TRAVEL_DATA) {
+
+                    }
+
+                    // tela 2
+                    composable(Routes.TRAVEL_OPTIONS){
+
+                    }
+
+                    // tela 3
+                    composable(Routes.TRAVEL_SUMMARY){
+
+                    }
                 }
+                
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FastTripPlannerTheme {
-        Greeting("Android")
     }
 }
