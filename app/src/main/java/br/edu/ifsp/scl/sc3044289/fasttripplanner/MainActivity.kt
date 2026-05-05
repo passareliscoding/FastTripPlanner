@@ -26,7 +26,12 @@ class MainActivity : ComponentActivity() {
                 ) {
                     // tela 1
                     composable(Routes.TRAVEL_DATA) {
-
+                        TravelDataScreen(
+                            viewModel = viewModel,
+                            onNavigate = {
+                                navController.navigate(Routes.TRAVEL_OPTIONS)
+                            }
+                        )
                     }
 
                     // tela 2
