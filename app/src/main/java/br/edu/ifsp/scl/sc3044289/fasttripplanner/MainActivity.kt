@@ -49,7 +49,15 @@ class MainActivity : ComponentActivity() {
 
                     // tela 3
                     composable(Routes.TRAVEL_SUMMARY){
-
+                        TravelSummaryScreen(
+                            viewModel = viewModel,
+                            onRestart = {
+                                viewModel.reset()
+                                navController.navigate(Routes.TRAVEL_DATA) {
+                                    popUpTo(Routes.TRAVEL_DATA) { inclusive = true }
+                                }
+                            }
+                        )
                     }
                 }
                 
