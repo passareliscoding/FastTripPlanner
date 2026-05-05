@@ -5,23 +5,30 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import br.edu.ifsp.scl.sc3044289.fasttripplanner.ui.screens.TravelDataScreen
+import br.edu.ifsp.scl.sc3044289.fasttripplanner.ui.screens.TravelOptionsScreen
 import br.edu.ifsp.scl.sc3044289.fasttripplanner.ui.theme.FastTripPlannerTheme
 
-class MainActivity : ComponentActivity() {
+class TravelOptionsActivity : ComponentActivity() {
     private val viewModel: TripViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (savedInstanceState == null) {
+            viewModel.loadFromIntent(intent)
+        }
+
         setContent {
             FastTripPlannerTheme {
-                TravelDataScreen(
+                TravelOptionsScreen(
                     viewModel = viewModel,
                     onNavigate = {
-                        val intent = Intent(this, TravelOptionsActivity::class.java)
+                        val intent = Intent(this, TravelSummaryActivity::class.java)
                             .putTripData(viewModel)
                         startActivity(intent)
+                    },
+                    onBack = {
+                        finish()
                     }
                 )
             }

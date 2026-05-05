@@ -1,12 +1,33 @@
 package br.edu.ifsp.scl.sc3044289.fasttripplanner
 
-object Routes {
-    /** Rota da Tela 1 — Dados da Viagem */
-    const val TRAVEL_DATA    = "travel_data"
+import android.content.Intent
 
-    /** Rota da Tela 2 — Opções da Viagem */
-    const val TRAVEL_OPTIONS = "travel_options"
+object TripIntentExtras {
+    const val DESTINATION = "br.edu.ifsp.scl.sc3044289.fasttripplanner.DESTINATION"
+    const val DAYS = "br.edu.ifsp.scl.sc3044289.fasttripplanner.DAYS"
+    const val DAILY_BUDGET = "br.edu.ifsp.scl.sc3044289.fasttripplanner.DAILY_BUDGET"
+    const val ACCOMMODATION = "br.edu.ifsp.scl.sc3044289.fasttripplanner.ACCOMMODATION"
+    const val HAS_TRANSPORT = "br.edu.ifsp.scl.sc3044289.fasttripplanner.HAS_TRANSPORT"
+    const val HAS_FOOD = "br.edu.ifsp.scl.sc3044289.fasttripplanner.HAS_FOOD"
+    const val HAS_TOURS = "br.edu.ifsp.scl.sc3044289.fasttripplanner.HAS_TOURS"
+}
 
-    /** Rota da Tela 3 — Resumo da Viagem */
-    const val TRAVEL_SUMMARY = "travel_summary"
+fun Intent.putTripData(viewModel: TripViewModel): Intent = apply {
+    putExtra(TripIntentExtras.DESTINATION, viewModel.destination)
+    putExtra(TripIntentExtras.DAYS, viewModel.days)
+    putExtra(TripIntentExtras.DAILY_BUDGET, viewModel.dailyBudget)
+    putExtra(TripIntentExtras.ACCOMMODATION, viewModel.accommodation)
+    putExtra(TripIntentExtras.HAS_TRANSPORT, viewModel.hasTransport)
+    putExtra(TripIntentExtras.HAS_FOOD, viewModel.hasFood)
+    putExtra(TripIntentExtras.HAS_TOURS, viewModel.hasTours)
+}
+
+fun TripViewModel.loadFromIntent(intent: Intent) {
+    destination = intent.getStringExtra(TripIntentExtras.DESTINATION).orEmpty()
+    days = intent.getStringExtra(TripIntentExtras.DAYS).orEmpty()
+    dailyBudget = intent.getStringExtra(TripIntentExtras.DAILY_BUDGET).orEmpty()
+    accommodation = intent.getStringExtra(TripIntentExtras.ACCOMMODATION) ?: "Econômica"
+    hasTransport = intent.getBooleanExtra(TripIntentExtras.HAS_TRANSPORT, false)
+    hasFood = intent.getBooleanExtra(TripIntentExtras.HAS_FOOD, false)
+    hasTours = intent.getBooleanExtra(TripIntentExtras.HAS_TOURS, false)
 }
