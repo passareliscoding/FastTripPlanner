@@ -36,7 +36,15 @@ class MainActivity : ComponentActivity() {
 
                     // tela 2
                     composable(Routes.TRAVEL_OPTIONS){
-
+                        TravelOptionsScreen(
+                            viewModel = viewModel,
+                            onNavigate = {
+                                navController.navigate(Routes.TRAVEL_SUMMARY)
+                            },
+                            onBack = {
+                                navController.popBackStack()
+                            }
+                        )
                     }
 
                     // tela 3
