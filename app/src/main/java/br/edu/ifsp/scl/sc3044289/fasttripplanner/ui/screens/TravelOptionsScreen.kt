@@ -97,6 +97,17 @@ fun TravelOptionsScreen(
 
                     // selectableGroup: semântica de grupo de opções exclusivas
                     Column(modifier = Modifier.selectableGroup()) {
+                        Button(
+                            onClick = {
+                                viewModel.accommodation = "EconomicMode"
+                                viewModel.hasTours = false
+                                viewModel.isEconomicMode = true
+                            }
+                        ) {
+                            Text(
+                                text = "Modo Econômico"
+                            )
+                        }
                         accommodationOptions.forEach { (option, multiplier) ->
                             Row(
                                 modifier = Modifier
@@ -105,7 +116,9 @@ fun TravelOptionsScreen(
                                     // selectable: torna a linha inteira clicável (melhor UX)
                                     .selectable(
                                         selected = viewModel.accommodation == option,
-                                        onClick = { viewModel.accommodation = option },
+                                        onClick = {
+                                            if (!viewModel.isEconomicMode) viewModel.accommodation = option
+                                                  },
                                         role = Role.RadioButton
                                     ),
                                 verticalAlignment = Alignment.CenterVertically

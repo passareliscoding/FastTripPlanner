@@ -34,6 +34,8 @@ class TripViewModel : ViewModel() {
      */
     var accommodation by mutableStateOf("Econômica")
 
+    var isEconomicMode by mutableStateOf(false)
+
     /** Serviço de transporte selecionado (+R$ 300 fixo) */
     var hasTransport by mutableStateOf(false)
 
@@ -68,6 +70,7 @@ class TripViewModel : ViewModel() {
             "Econômica" -> 1.0
             "Conforto" -> 1.5
             "Luxo" -> 2.2
+            "EconomicMode" -> 0.85
             else -> 1.0
         }
 
